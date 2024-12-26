@@ -19,11 +19,8 @@ describe("ThreadRepositoryPostgres", () => {
 
   describe("addThread function", () => {
     it("should persist Add Thread", async () => {
-      const registerUser = new RegisterUser({
-        username: "dicoding",
-        password: "secret_password",
-        fullname: "Dicoding Indonesia",
-      });
+      const ownerId = "user-12345";
+      await UsersTableTestHelper.addUser({ id: ownerId, username: "user" });
 
       // Arrange
       const addThread = new AddThread({
@@ -33,25 +30,13 @@ describe("ThreadRepositoryPostgres", () => {
 
       const fakeIdGenerator = () => "123"; // stub!
 
-      const userRepositoryPostgres = new UserRepositoryPostgres(
-        pool,
-        fakeIdGenerator
-      );
-
-      // Action
-      await userRepositoryPostgres.addUser(registerUser);
-
-      // Assert
-      const users = await UsersTableTestHelper.findUsersById("user-123");
-      const owner = users[0].id;
-
       const threadRepositoryPostgres = new ThreadRepositoryPostgres(
         pool,
         fakeIdGenerator
       );
 
       // Action
-      await threadRepositoryPostgres.addThread(addThread, owner);
+      await threadRepositoryPostgres.addThread(addThread, ownerId);
 
       // Assert
       const threads = await ThreadsTableTestHelper.findThreadsById(
@@ -61,11 +46,8 @@ describe("ThreadRepositoryPostgres", () => {
     });
 
     it("should return added thread correctly", async () => {
-      const registerUser = new RegisterUser({
-        username: "dicoding",
-        password: "secret_password",
-        fullname: "Dicoding Indonesia",
-      });
+      const ownerId = "user-12345";
+      await UsersTableTestHelper.addUser({ id: ownerId, username: "user" });
 
       // Arrange
       const addThread = new AddThread({
@@ -74,32 +56,23 @@ describe("ThreadRepositoryPostgres", () => {
       });
       const fakeIdGenerator = () => "123"; // stub!
 
-      const userRepositoryPostgres = new UserRepositoryPostgres(
-        pool,
-        fakeIdGenerator
-      );
-
-      // Action
-      await userRepositoryPostgres.addUser(registerUser);
-
-      // Assert
-      const users = await UsersTableTestHelper.findUsersById("user-123");
-      const owner = users[0].id;
-
       const threadRepositoryPostgres = new ThreadRepositoryPostgres(
         pool,
         fakeIdGenerator
       );
 
       // Action
-      const addedThread = await threadRepositoryPostgres.addThread(addThread, owner);
+      const addedThread = await threadRepositoryPostgres.addThread(
+        addThread,
+        ownerId
+      );
 
       // Assert
       expect(addedThread).toStrictEqual(
         new AddedThread({
           id: "thread-123",
           title: "ini title",
-          owner: "user-123",
+          owner: ownerId,
         })
       );
     });

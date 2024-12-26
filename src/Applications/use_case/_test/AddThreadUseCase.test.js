@@ -30,21 +30,25 @@ describe("AddThreadUseCase", () => {
     });
 
     // Action
-    const addedThread = await getThreadUseCase.execute(useCasePayload);
+    const addedThread = await getThreadUseCase.execute(
+      useCasePayload,
+      "user-123"
+    );
 
     // Assert
     expect(addedThread).toStrictEqual(
       new AddedThread({
         id: "thread-123",
-        title: useCasePayload.title,
+        title: "ini title",
         owner: "user-123",
       })
     );
     expect(mockThreadRepository.addThread).toBeCalledWith(
       new AddThread({
-        title: useCasePayload.title,
-        body: useCasePayload.body,
-      })
+        title: "ini title",
+        body: "ini body",
+      }),
+      "user-123"
     );
   });
 });
