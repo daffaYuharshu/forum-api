@@ -7,10 +7,11 @@ const ThreadsTableTestHelper = {
     title = "ini title",
     body = "ini body",
     owner = "user-123",
+    createdAt = "2024-12-05T09:29:19.775Z"
   }) {
     const query = {
-      text: "INSERT INTO threads VALUES($1, $2, $3, $4)",
-      values: [id, title, body, owner],
+      text: "INSERT INTO threads VALUES($1, $2, $3, $4, $5)",
+      values: [id, title, body, owner, createdAt],
     };
 
     await pool.query(query);

@@ -130,5 +130,27 @@ describe("/threads endpoint", () => {
         "tidak dapat membuat thread baru karena tipe data tidak sesuai"
       );
     });
+
+    it("should response 401 when access token unavailable", async () => {
+      // Arrange
+      const requestPayload = {
+        title: "ini title",
+        body: "ini body",
+      };
+      const server = await createServer(container);
+
+      // Action
+      const response = await server.inject({
+        method: "POST",
+        url: "/threads",
+        payload: requestPayload,
+      });
+
+      // Assert
+      const responseJson = JSON.parse(response.payload);
+      expect(response.statusCode).toEqual(401);
+      expect(responseJson.status).toEqual("fail");
+      expect(responseJson.message).toEqual("Missing authentication");
+    });
   });
 });

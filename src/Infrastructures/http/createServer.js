@@ -1,10 +1,11 @@
 const Hapi = require("@hapi/hapi");
-const Jwt = require('@hapi/jwt');
+const Jwt = require("@hapi/jwt");
 const ClientError = require("../../Commons/exceptions/ClientError");
 const DomainErrorTranslator = require("../../Commons/exceptions/DomainErrorTranslator");
 const users = require("../../Interfaces/http/api/users");
 const authentications = require("../../Interfaces/http/api/authentications");
 const threads = require("../../Interfaces/http/api/threads");
+const comments = require("../../Interfaces/http/api/comments");
 const config = require("../../../config/utils/config");
 
 const createServer = async (container) => {
@@ -18,7 +19,7 @@ const createServer = async (container) => {
       plugin: Jwt,
     },
   ]);
-  
+
   server.auth.strategy("forumapi_jwt", "jwt", {
     keys: config.jwt.accessTokenKey,
     verify: {
@@ -46,6 +47,10 @@ const createServer = async (container) => {
     },
     {
       plugin: threads,
+      options: { container },
+    },
+    {
+      plugin: comments,
       options: { container },
     },
   ]);

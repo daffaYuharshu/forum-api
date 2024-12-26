@@ -1,16 +1,12 @@
 /* eslint-disable camelcase */
 
 exports.up = (pgm) => {
-  pgm.createTable("threads", {
+  pgm.createTable("comments", {
     id: {
       type: "VARCHAR(50)",
       primaryKey: true,
     },
-    title: {
-      type: "VARCHAR(50)",
-      notNull: true,
-    },
-    body: {
+    content: {
       type: "TEXT",
       notNull: true,
     },
@@ -18,7 +14,15 @@ exports.up = (pgm) => {
       type: "VARCHAR(50)",
       notNull: true,
     },
+    thread_id: {
+      type: "VARCHAR(50)",
+      notNull: true,
+    },
     created_at: {
+      type: "TIMESTAMP",
+      notNull: true,
+    },
+    deleted_at: {
       type: "TIMESTAMP",
       notNull: false,
     },
@@ -26,5 +30,5 @@ exports.up = (pgm) => {
 };
 
 exports.down = (pgm) => {
-  pgm.dropTable("threads");
+    pgm.dropTable("comments");
 };
