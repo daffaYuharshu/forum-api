@@ -102,4 +102,29 @@ describe("ThreadRepositoryPostgres", () => {
       ).resolves.not.toThrow(NotFoundError);
     });
   });
+
+  describe("getThreadById function", () => {
+    it("should return detail thread correctly", async () => {
+      const threadId = "thread-123";
+      const ownerId = "user-123";
+
+      await UsersTableTestHelper.addUser({ id: ownerId, username: "dicoding" });
+
+      await ThreadsTableTestHelper.addThread({ id: threadId, owner: ownerId });
+
+      const threadRepositoryPostgres = new ThreadRepositoryPostgres(pool, {});
+
+      const detailThread = await threadRepositoryPostgres.getThreadById(
+        threadId
+      );
+
+      expect(detailThread).toStrictEqual({
+        id: "thread-123",
+        title: "ini title",
+        body: "ini body",
+        date: new Date("2024-12-05T02:29:19.775Z").toISOString(),
+        username: "dicoding",
+      });
+    });
+  });
 });

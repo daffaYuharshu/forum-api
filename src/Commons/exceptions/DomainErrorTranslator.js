@@ -46,6 +46,30 @@ DomainErrorTranslator._directories = {
   "ADD_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION": new InvariantError(
     "tidak dapat membuat komentar baru karena tipe data tidak sesuai"
   ),
+  "ADD_COMMENT_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER": new InvariantError(
+    "tidak dapat membuat komentar baru karena parameter yang dibutuhkan tidak ada"
+  ),
+  "ADD_COMMENT_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION": new InvariantError(
+    "tidak dapat membuat komentar baru karena tipe data tidak sesuai"
+  ),
+  "DELETE_COMMENT_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER": new InvariantError(
+    "tidak dapat menghapus komentar karena parameter yang dibutuhkan tidak ada"
+  ),
+  "DELETE_COMMENT_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION": new InvariantError(
+    "tidak dapat menghapus komentar karena tipe data tidak sesuai"
+  ),
+  "ADD_REPLY.NOT_CONTAIN_NEEDED_PROPERTY": new InvariantError(
+    "tidak dapat membuat balasan baru karena properti yang dibutuhkan tidak ada"
+  ),
+  "ADD_REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION": new InvariantError(
+    "tidak dapat membuat balasan baru karena tipe data tidak sesuai"
+  ),
+  "ADD_REPLY_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER": new InvariantError(
+    "tidak dapat membuat balasan baru karena parameter yang dibutuhkan tidak ada"
+  ),
+  "ADD_REPLY_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION": new InvariantError(
+    "tidak dapat membuat balasan baru karena tipe data tidak sesuai"
+  ),
   "Missing authentication": new AuthenticationError("Missing authentication"),
 };
 

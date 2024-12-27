@@ -18,13 +18,13 @@ exports.up = (pgm) => {
       type: "VARCHAR(50)",
       notNull: true,
     },
-    created_at: {
+    date: {
       type: "TIMESTAMP",
       notNull: true,
     },
-    deleted_at: {
-      type: "TIMESTAMP",
-      notNull: false,
+    is_delete: {
+      type: "BOOLEAN",
+      notNull: true,
     },
   });
 };

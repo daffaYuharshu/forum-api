@@ -1,16 +1,12 @@
 /* eslint-disable camelcase */
 
 exports.up = (pgm) => {
-  pgm.createTable("threads", {
+  pgm.createTable("replies", {
     id: {
       type: "VARCHAR(50)",
       primaryKey: true,
     },
-    title: {
-      type: "VARCHAR(50)",
-      notNull: true,
-    },
-    body: {
+    content: {
       type: "TEXT",
       notNull: true,
     },
@@ -18,13 +14,21 @@ exports.up = (pgm) => {
       type: "VARCHAR(50)",
       notNull: true,
     },
+    comment_id: {
+      type: "VARCHAR(50)",
+      notNull: true,
+    },
     date: {
       type: "TIMESTAMP",
-      notNull: false,
+      notNull: true,
+    },
+    is_delete: {
+      type: "BOOLEAN",
+      notNull: true,
     },
   });
 };
 
 exports.down = (pgm) => {
-  pgm.dropTable("threads");
+  pgm.dropTable("replies");
 };
