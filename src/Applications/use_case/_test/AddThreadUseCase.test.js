@@ -4,6 +4,38 @@ const ThreadRepository = require("../../../Domains/threads/ThreadRepository");
 const AddThreadUseCase = require("../AddThreadUseCase");
 
 describe("AddThreadUseCase", () => {
+  it("should throw error if add thread not contain needed parameter", async () => {
+    // Arrange
+    const useCasePayload = {
+      title: "ini title",
+      body: "ini body",
+    };
+
+    /** creating use case instance */
+    const getCommentUseCase = new AddThreadUseCase({});
+
+    // Action & Assert
+    await expect(
+      getCommentUseCase.execute(useCasePayload, null)
+    ).rejects.toThrow("ADD_THREAD_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER");
+  });
+
+  it("should throw error if add thread parameter not meet data type specification", async () => {
+    // Arrange
+    const useCasePayload = {
+      title: "ini title",
+      body: "ini body",
+    };
+
+    /** creating use case instance */
+    const getCommentUseCase = new AddThreadUseCase({});
+
+    // Action & Assert
+    await expect(
+      getCommentUseCase.execute(useCasePayload, 123)
+    ).rejects.toThrow("ADD_THREAD_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION");
+  });
+
   it("should orchestrating the add thread action correctly", async () => {
     // Arrange
     const useCasePayload = {

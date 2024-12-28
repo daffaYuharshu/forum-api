@@ -6,6 +6,36 @@ const ThreadRepository = require("../../../Domains/threads/ThreadRepository");
 const AddReplyUseCase = require("../AddReplyUseCase");
 
 describe("AddReplyUseCase", () => {
+  it("should throw error if add reply not contain needed parameter", async () => {
+    // Arrange
+    const useCasePayload = {
+      content: "content",
+    };
+
+    /** creating use case instance */
+    const getCommentUseCase = new AddReplyUseCase({});
+
+    // Action & Assert
+    await expect(
+      getCommentUseCase.execute(useCasePayload, null, null, "comment-123")
+    ).rejects.toThrow("ADD_REPLY_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER");
+  });
+
+  it("should throw error if add reply parameter not meet data type specification", async () => {
+    // Arrange
+    const useCasePayload = {
+      content: "content",
+    };
+
+    /** creating use case instance */
+    const getCommentUseCase = new AddReplyUseCase({});
+
+    // Action & Assert
+    await expect(
+      getCommentUseCase.execute(useCasePayload, 123, true, 321)
+    ).rejects.toThrow("ADD_REPLY_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION");
+  });
+
   it("should orchestrating the add reply action correctly", async () => {
     // Arrange
     const useCasePayload = {
@@ -25,10 +55,10 @@ describe("AddReplyUseCase", () => {
     /** mocking needed function */
     mockThreadRepository.verifyThreadAvailability = jest
       .fn()
-      .mockImplementation(() => Promise.resolve("thread-123"));
+      .mockImplementation(() => Promise.resolve());
     mockCommentRepository.verifyCommentAvailability = jest
       .fn()
-      .mockImplementation(() => Promise.resolve("comment-123"));
+      .mockImplementation(() => Promise.resolve());
     mockReplyRepository.addReply = jest
       .fn()
       .mockImplementation(() => Promise.resolve(mockAddedReply));
