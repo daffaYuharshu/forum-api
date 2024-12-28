@@ -254,6 +254,7 @@ describe("ReplyRepositoryPostgres", () => {
           date: new Date("2024-12-05T03:29:19.775Z").toISOString(),
           content: "content",
           isDelete: false,
+          commentId: "comment-123",
         },
       ]);
     });

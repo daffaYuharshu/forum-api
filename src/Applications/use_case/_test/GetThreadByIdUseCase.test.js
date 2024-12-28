@@ -22,9 +22,7 @@ describe("GetThreadByIdUseCase", () => {
     const getThreadByIdUseCase = new GetThreadByIdUseCase({});
 
     // Action & Assert
-    await expect(
-      getThreadByIdUseCase.execute(123)
-    ).rejects.toThrow(
+    await expect(getThreadByIdUseCase.execute(123)).rejects.toThrow(
       "GET_THREAD_BY_ID_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION"
     );
   });
@@ -92,9 +90,9 @@ describe("GetThreadByIdUseCase", () => {
     mockCommentRepository.getCommentsByThreadId = jest
       .fn()
       .mockImplementation(() => Promise.resolve(comments));
-    mockReplyRepository.getRepliesByCommentId = jest.fn((commentId) =>
-      Promise.resolve(replies.filter((reply) => reply.commentId === commentId))
-    );
+    mockReplyRepository.getRepliesByCommentId = jest
+      .fn()
+      .mockImplementation(() => Promise.resolve(replies));
 
     /** creating use case instance */
     const getThreadUseCase = new GetThreadByIdUseCase({

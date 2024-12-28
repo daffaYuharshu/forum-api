@@ -32,15 +32,9 @@ class GetThreadByIdUseCase {
         const replies = await this._replyRepository.getRepliesByCommentId(
           comment.id
         );
-
-        return new DetailComment({
-          id: comment.id,
-          content: comment.isDelete
-            ? "**komentar telah dihapus**"
-            : comment.content,
-          date: comment.date,
-          username: comment.username,
-          replies: replies.map(
+        const mappedReplies = replies
+          .filter((reply) => reply.commentId === comment.id)
+          .map(
             (reply) =>
               new DetailReply({
                 id: reply.id,
@@ -50,7 +44,16 @@ class GetThreadByIdUseCase {
                 date: reply.date,
                 username: reply.username,
               })
-          ),
+          );
+
+        return new DetailComment({
+          id: comment.id,
+          content: comment.isDelete
+            ? "**komentar telah dihapus**"
+            : comment.content,
+          date: comment.date,
+          username: comment.username,
+          replies: mappedReplies,
         });
       })
     );
