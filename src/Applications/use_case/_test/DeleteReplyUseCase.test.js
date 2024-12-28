@@ -4,21 +4,21 @@ const DeleteReplyUseCase = require("../DeleteReplyUseCase");
 describe("DeleteReplyUseCase", () => {
   it("should throw error if delete reply not contain needed parameter", async () => {
     /** creating use case instance */
-    const getCommentUseCase = new DeleteReplyUseCase({});
+    const deleteReplyUseCase = new DeleteReplyUseCase({});
 
     // Action & Assert
-    await expect(getCommentUseCase.execute()).rejects.toThrow(
+    await expect(deleteReplyUseCase.execute()).rejects.toThrow(
       "DELETE_REPLY_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER"
     );
   });
 
   it("should throw error if delete reply parameter not meet data type specification", async () => {
     /** creating use case instance */
-    const getCommentUseCase = new DeleteReplyUseCase({});
+    const deleteReplyUseCase = new DeleteReplyUseCase({});
 
     // Action & Assert
     await expect(
-      getCommentUseCase.execute(123, "user-123")
+      deleteReplyUseCase.execute(123, "user-123")
     ).rejects.toThrow(
       "DELETE_REPLY_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION"
     );

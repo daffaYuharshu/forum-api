@@ -9,21 +9,21 @@ const ReplyRepository = require("../../../Domains/replies/ReplyRepository");
 describe("GetThreadByIdUseCase", () => {
   it("should throw error if get thread by id not contain needed parameter", async () => {
     /** creating use case instance */
-    const getCommentUseCase = new GetThreadByIdUseCase({});
+    const getThreadByIdUseCase = new GetThreadByIdUseCase({});
 
     // Action & Assert
-    await expect(getCommentUseCase.execute()).rejects.toThrow(
+    await expect(getThreadByIdUseCase.execute()).rejects.toThrow(
       "GET_THREAD_BY_ID_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER"
     );
   });
 
   it("should throw error if get thread by id parameter not meet data type specification", async () => {
     /** creating use case instance */
-    const getCommentUseCase = new GetThreadByIdUseCase({});
+    const getThreadByIdUseCase = new GetThreadByIdUseCase({});
 
     // Action & Assert
     await expect(
-      getCommentUseCase.execute(123)
+      getThreadByIdUseCase.execute(123)
     ).rejects.toThrow(
       "GET_THREAD_BY_ID_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION"
     );

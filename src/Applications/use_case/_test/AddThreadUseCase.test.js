@@ -12,11 +12,11 @@ describe("AddThreadUseCase", () => {
     };
 
     /** creating use case instance */
-    const getCommentUseCase = new AddThreadUseCase({});
+    const addThreadUseCase = new AddThreadUseCase({});
 
     // Action & Assert
     await expect(
-      getCommentUseCase.execute(useCasePayload, null)
+      addThreadUseCase.execute(useCasePayload, null)
     ).rejects.toThrow("ADD_THREAD_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER");
   });
 
@@ -28,11 +28,11 @@ describe("AddThreadUseCase", () => {
     };
 
     /** creating use case instance */
-    const getCommentUseCase = new AddThreadUseCase({});
+    const addThreadUseCase = new AddThreadUseCase({});
 
     // Action & Assert
     await expect(
-      getCommentUseCase.execute(useCasePayload, 123)
+      addThreadUseCase.execute(useCasePayload, 123)
     ).rejects.toThrow("ADD_THREAD_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION");
   });
 
@@ -57,12 +57,12 @@ describe("AddThreadUseCase", () => {
       .mockImplementation(() => Promise.resolve(mockAddedThread));
 
     /** creating use case instance */
-    const getThreadUseCase = new AddThreadUseCase({
+    const addThreadUseCase = new AddThreadUseCase({
       threadRepository: mockThreadRepository,
     });
 
     // Action
-    const addedThread = await getThreadUseCase.execute(
+    const addedThread = await addThreadUseCase.execute(
       useCasePayload,
       "user-123"
     );

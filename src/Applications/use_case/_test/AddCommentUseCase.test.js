@@ -12,11 +12,11 @@ describe("AddCommentUseCase", () => {
     };
 
     /** creating use case instance */
-    const getCommentUseCase = new AddCommentUseCase({});
+    const addCommentUseCase = new AddCommentUseCase({});
 
     // Action & Assert
     await expect(
-      getCommentUseCase.execute(useCasePayload, null, null)
+      addCommentUseCase.execute(useCasePayload, null, null)
     ).rejects.toThrow("ADD_COMMENT_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER");
   });
 
@@ -27,11 +27,11 @@ describe("AddCommentUseCase", () => {
     };
 
     /** creating use case instance */
-    const getCommentUseCase = new AddCommentUseCase({});
+    const addCommentUseCase = new AddCommentUseCase({});
 
     // Action & Assert
     await expect(
-      getCommentUseCase.execute(useCasePayload, 123, true)
+      addCommentUseCase.execute(useCasePayload, 123, true)
     ).rejects.toThrow("ADD_COMMENT_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION");
   });
 
@@ -59,13 +59,13 @@ describe("AddCommentUseCase", () => {
       .mockImplementation(() => Promise.resolve(mockAddedComment));
 
     /** creating use case instance */
-    const getCommentUseCase = new AddCommentUseCase({
+    const addCommentUseCase = new AddCommentUseCase({
       commentRepository: mockCommentRepository,
       threadRepository: mockThreadRepository,
     });
 
     // Action
-    const addedComment = await getCommentUseCase.execute(
+    const addedComment = await addCommentUseCase.execute(
       useCasePayload,
       "user-123",
       "thread-123"
