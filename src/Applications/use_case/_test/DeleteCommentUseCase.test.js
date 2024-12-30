@@ -1,33 +1,33 @@
-const CommentRepository = require("../../../Domains/comments/CommentRepository");
-const DeleteCommentUseCase = require("../DeleteCommentUseCase");
+const CommentRepository = require('../../../Domains/comments/CommentRepository');
+const DeleteCommentUseCase = require('../DeleteCommentUseCase');
 
-describe("DeleteCommentUseCase", () => {
-  it("should throw error if delete comment not contain needed parameter", async () => {
+describe('DeleteCommentUseCase', () => {
+  it('should throw error if delete comment not contain needed parameter', async () => {
     /** creating use case instance */
     const getCommentUseCase = new DeleteCommentUseCase({});
 
     // Action & Assert
     await expect(getCommentUseCase.execute()).rejects.toThrow(
-      "DELETE_COMMENT_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER"
+      'DELETE_COMMENT_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER',
     );
   });
 
-  it("should throw error if delete comment parameter not meet data type specification", async () => {
+  it('should throw error if delete comment parameter not meet data type specification', async () => {
     /** creating use case instance */
     const getCommentUseCase = new DeleteCommentUseCase({});
 
     // Action & Assert
     await expect(
-      getCommentUseCase.execute(123, "user-123")
+      getCommentUseCase.execute(123, 'user-123'),
     ).rejects.toThrow(
-      "DELETE_COMMENT_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION"
+      'DELETE_COMMENT_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION',
     );
   });
 
-  it("should orchestrating the delete comment action correctly", async () => {
+  it('should orchestrating the delete comment action correctly', async () => {
     // Arrange
-    const commentId = "comment-123";
-    const userId = "user-123";
+    const commentId = 'comment-123';
+    const userId = 'user-123';
 
     /** creating dependency of use case */
     const mockCommentRepository = new CommentRepository();
@@ -53,11 +53,11 @@ describe("DeleteCommentUseCase", () => {
 
     // Assert
     expect(mockCommentRepository.verifyCommentAvailability).toBeCalledWith(
-      commentId
+      commentId,
     );
     expect(mockCommentRepository.verifyCommentOwner).toBeCalledWith(
       commentId,
-      userId
+      userId,
     );
     expect(mockCommentRepository.deleteCommentById).toBeCalledWith(commentId);
   });

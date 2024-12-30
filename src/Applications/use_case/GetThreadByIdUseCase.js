@@ -3,10 +3,16 @@ const DetailComment = require("../../Domains/comments/entities/DetailComment");
 const DetailReply = require("../../Domains/replies/entities/DetailReply");
 
 class GetThreadByIdUseCase {
-  constructor({ threadRepository, commentRepository, replyRepository }) {
+  constructor({
+    threadRepository,
+    commentRepository,
+    replyRepository,
+    likeRepository,
+  }) {
     this._threadRepository = threadRepository;
     this._commentRepository = commentRepository;
     this._replyRepository = replyRepository;
+    this._likeRepository = likeRepository;
   }
 
   async execute(threadId) {
@@ -45,6 +51,11 @@ class GetThreadByIdUseCase {
                 username: reply.username,
               })
           );
+        const likes = await this._likeRepository.getLikesByCommentId(
+          comment.id
+        );
+
+        const totalLike = likes.length;
 
         return new DetailComment({
           id: comment.id,
@@ -53,6 +64,7 @@ class GetThreadByIdUseCase {
             : comment.content,
           date: comment.date,
           username: comment.username,
+          likeCount: totalLike,
           replies: mappedReplies,
         });
       })

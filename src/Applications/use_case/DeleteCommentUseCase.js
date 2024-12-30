@@ -5,12 +5,12 @@ class DeleteCommentUseCase {
 
   async execute(commentId, userId) {
     if (!commentId) {
-      throw new Error("DELETE_COMMENT_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER");
+      throw new Error('DELETE_COMMENT_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER');
     }
 
-    if (typeof commentId !== "string") {
+    if (typeof commentId !== 'string') {
       throw new Error(
-        "DELETE_COMMENT_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION"
+        'DELETE_COMMENT_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION',
       );
     }
 

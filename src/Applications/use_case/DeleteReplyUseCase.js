@@ -5,12 +5,12 @@ class DeleteReplyUseCase {
 
   async execute(replyId, userId) {
     if (!replyId) {
-      throw new Error("DELETE_REPLY_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER");
+      throw new Error('DELETE_REPLY_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER');
     }
 
-    if (typeof replyId !== "string") {
+    if (typeof replyId !== 'string') {
       throw new Error(
-        "DELETE_REPLY_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION"
+        'DELETE_REPLY_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION',
       );
     }
 

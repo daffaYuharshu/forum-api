@@ -1,4 +1,4 @@
-const AddReply = require("../../Domains/replies/entities/AddReply");
+const AddReply = require('../../Domains/replies/entities/AddReply');
 
 class AddReplyUseCase {
   constructor({ replyRepository, threadRepository, commentRepository }) {
@@ -9,16 +9,16 @@ class AddReplyUseCase {
 
   async execute(useCasePayload, ownerId, threadId, commentId) {
     if (!ownerId || !threadId || !commentId) {
-      throw new Error("ADD_REPLY_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER");
+      throw new Error('ADD_REPLY_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER');
     }
 
     if (
-      typeof ownerId !== "string" ||
-      typeof threadId !== "string" ||
-      typeof commentId !== "string"
+      typeof ownerId !== 'string'
+      || typeof threadId !== 'string'
+      || typeof commentId !== 'string'
     ) {
       throw new Error(
-        "ADD_REPLY_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION"
+        'ADD_REPLY_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION',
       );
     }
 
@@ -28,7 +28,7 @@ class AddReplyUseCase {
     return this._replyRepository.addReply(
       addReply,
       ownerId,
-      commentId
+      commentId,
     );
   }
 }

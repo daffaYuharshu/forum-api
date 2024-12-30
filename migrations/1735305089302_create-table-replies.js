@@ -1,34 +1,34 @@
 /* eslint-disable camelcase */
 
 exports.up = (pgm) => {
-  pgm.createTable("replies", {
+  pgm.createTable('replies', {
     id: {
-      type: "VARCHAR(50)",
+      type: 'VARCHAR(50)',
       primaryKey: true,
     },
     content: {
-      type: "TEXT",
+      type: 'TEXT',
       notNull: true,
     },
     owner: {
-      type: "VARCHAR(50)",
+      type: 'VARCHAR(50)',
       notNull: true,
     },
     comment_id: {
-      type: "VARCHAR(50)",
+      type: 'VARCHAR(50)',
       notNull: true,
     },
     date: {
-      type: "TIMESTAMP",
+      type: 'TIMESTAMP',
       notNull: true,
     },
     is_delete: {
-      type: "BOOLEAN",
+      type: 'BOOLEAN',
       notNull: true,
     },
   });
 };
 
 exports.down = (pgm) => {
-  pgm.dropTable("replies");
+  pgm.dropTable('replies');
 };

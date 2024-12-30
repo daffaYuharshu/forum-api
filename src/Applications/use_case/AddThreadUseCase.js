@@ -1,4 +1,4 @@
-const AddThread = require("../../Domains/threads/entities/AddThread");
+const AddThread = require('../../Domains/threads/entities/AddThread');
 
 class AddThreadUseCase {
   constructor({ threadRepository }) {
@@ -7,12 +7,12 @@ class AddThreadUseCase {
 
   async execute(useCasePayload, ownerId) {
     if (!ownerId) {
-      throw new Error("ADD_THREAD_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER");
+      throw new Error('ADD_THREAD_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER');
     }
 
-    if (typeof ownerId !== "string") {
+    if (typeof ownerId !== 'string') {
       throw new Error(
-        "ADD_THREAD_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION"
+        'ADD_THREAD_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION',
       );
     }
 

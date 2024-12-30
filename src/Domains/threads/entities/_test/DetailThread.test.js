@@ -1,52 +1,54 @@
-const DetailThread = require("../DetailThread");
+const DetailThread = require('../DetailThread');
 
-describe("a DetailThread entities", () => {
-  it("should throw error when payload not contain needed property", () => {
+describe('a DetailThread entities', () => {
+  it('should throw error when payload not contain needed property', () => {
     // Arrange
     const payload = {
-      id: "thread-123",
-      title: "title",
-      body: "body",
-      date: "2021-08-08T07:19:09.775Z",
+      id: 'thread-123',
+      title: 'title',
+      body: 'body',
+      date: '2021-08-08T07:19:09.775Z',
     };
 
     // Action & Assert
     expect(() => new DetailThread(payload)).toThrowError(
-      "DETAIL_THREAD.NOT_CONTAIN_NEEDED_PROPERTY"
+      'DETAIL_THREAD.NOT_CONTAIN_NEEDED_PROPERTY',
     );
   });
 
-  it("should throw error when payload did not meet data type specification", () => {
+  it('should throw error when payload did not meet data type specification', () => {
     // Arrange
     const payload = {
       id: 123,
-      title: "title",
+      title: 'title',
       body: true,
-      date: "2021-08-08T07:19:09.775Z",
-      username: "dicoding",
+      date: '2021-08-08T07:19:09.775Z',
+      username: 'dicoding',
       comments: [],
     };
 
     // Action and Assert
     expect(() => new DetailThread(payload)).toThrowError(
-      "DETAIL_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION"
+      'DETAIL_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION',
     );
   });
 
-  it("should create detailThread object correctly", () => {
+  it('should create detailThread object correctly', () => {
     // Arrange
     const payload = {
-      id: "thread-123",
-      title: "title",
-      body: "body",
-      date: "2021-08-08T07:19:09.775Z",
-      username: "dicoding",
+      id: 'thread-123',
+      title: 'title',
+      body: 'body',
+      date: '2021-08-08T07:19:09.775Z',
+      username: 'dicoding',
       comments: [],
     };
 
     // Action
-    const { id, title, body, date, username, comments } = new DetailThread(
-      payload
+    const {
+      id, title, body, date, username, comments,
+    } = new DetailThread(
+      payload,
     );
 
     // Assert
