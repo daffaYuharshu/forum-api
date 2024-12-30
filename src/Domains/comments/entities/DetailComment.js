@@ -2,7 +2,9 @@ class DetailComment {
   constructor(payload) {
     this._verifyPayload(payload);
 
-    const { id, username, content, date, likeCount, replies } = payload;
+    const {
+      id, username, content, date, likeCount, replies,
+    } = payload;
 
     this.id = id;
     this.username = username;
@@ -12,27 +14,29 @@ class DetailComment {
     this.replies = replies;
   }
 
-  _verifyPayload({ id, username, content, date, likeCount, replies }) {
+  _verifyPayload({
+    id, username, content, date, likeCount, replies,
+  }) {
     if (
-      !id ||
-      !username ||
-      !content ||
-      !date ||
-      !replies ||
-      likeCount === undefined
+      !id
+      || !username
+      || !content
+      || !date
+      || !replies
+      || likeCount === undefined
     ) {
-      throw new Error("DETAIL_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY");
+      throw new Error('DETAIL_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY');
     }
 
     if (
-      typeof id !== "string" ||
-      typeof username !== "string" ||
-      typeof content !== "string" ||
-      typeof date !== "string" ||
-      !Number.isInteger(likeCount) ||
-      !Array.isArray(replies)
+      typeof id !== 'string'
+      || typeof username !== 'string'
+      || typeof content !== 'string'
+      || typeof date !== 'string'
+      || !Number.isInteger(likeCount)
+      || !Array.isArray(replies)
     ) {
-      throw new Error("DETAIL_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION");
+      throw new Error('DETAIL_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION');
     }
   }
 }

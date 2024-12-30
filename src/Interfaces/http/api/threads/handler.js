@@ -30,19 +30,19 @@ class ThreadsHandler {
   async getThreadByIdHandler(request, h) {
     const { threadId } = request.params;
     const getThreadByIdUseCase = this._container.getInstance(
-      GetThreadByIdUseCase.name
+      GetThreadByIdUseCase.name,
     );
-  
+
     try {
       const thread = await getThreadByIdUseCase.execute(threadId);
-  
+
       return {
         status: 'success',
         data: { thread },
       };
     } catch (error) {
-      console.error(error);  // Log the error for debugging purposes
-  
+      console.error(error); // Log the error for debugging purposes
+
       // Handle specific error cases or send a generic error response
       return h.response({
         status: 'fail',
@@ -50,7 +50,6 @@ class ThreadsHandler {
       }).code(500);
     }
   }
-  
 }
 
 module.exports = ThreadsHandler;

@@ -1,14 +1,14 @@
 /* istanbul ignore file */
-const pool = require("../src/Infrastructures/database/postgres/pool");
+const pool = require('../src/Infrastructures/database/postgres/pool');
 
 const LikesTableTestHelper = {
   async addLike({
-    id = "like-123",
-    owner = "user-123",
-    commentId = "comment-123",
+    id = 'like-123',
+    owner = 'user-123',
+    commentId = 'comment-123',
   }) {
     const query = {
-      text: "INSERT INTO likes VALUES($1, $2, $3)",
+      text: 'INSERT INTO likes VALUES($1, $2, $3)',
       values: [id, owner, commentId],
     };
 
@@ -17,7 +17,7 @@ const LikesTableTestHelper = {
 
   async findLikesById(id) {
     const query = {
-      text: "SELECT * FROM likes WHERE id = $1",
+      text: 'SELECT * FROM likes WHERE id = $1',
       values: [id],
     };
 
@@ -26,7 +26,7 @@ const LikesTableTestHelper = {
   },
 
   async cleanTable() {
-    await pool.query("DELETE FROM likes WHERE 1=1");
+    await pool.query('DELETE FROM likes WHERE 1=1');
   },
 };
 

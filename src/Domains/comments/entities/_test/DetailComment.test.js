@@ -22,7 +22,7 @@ describe('a DetailComment entities', () => {
       username: 'dicoding',
       content: true,
       date: '2021-08-08T07:19:09.775Z',
-      likeCount: "1",
+      likeCount: '1',
       replies: [],
     };
 
@@ -45,7 +45,7 @@ describe('a DetailComment entities', () => {
 
     // Action
     const {
-      id, username, content, date, replies, likeCount
+      id, username, content, date, replies, likeCount,
     } = new DetailComment(payload);
 
     // Assert

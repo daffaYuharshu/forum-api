@@ -1,93 +1,93 @@
-const DetailThread = require("../../../Domains/threads/entities/DetailThread");
-const ThreadRepository = require("../../../Domains/threads/ThreadRepository");
-const CommentRepository = require("../../../Domains/comments/CommentRepository");
-const DetailComment = require("../../../Domains/comments/entities/DetailComment");
-const GetThreadByIdUseCase = require("../GetThreadByIdUseCase");
-const DetailReply = require("../../../Domains/replies/entities/DetailReply");
-const ReplyRepository = require("../../../Domains/replies/ReplyRepository");
-const LikeRepository = require("../../../Domains/likes/LikeRepository");
+const DetailThread = require('../../../Domains/threads/entities/DetailThread');
+const ThreadRepository = require('../../../Domains/threads/ThreadRepository');
+const CommentRepository = require('../../../Domains/comments/CommentRepository');
+const DetailComment = require('../../../Domains/comments/entities/DetailComment');
+const GetThreadByIdUseCase = require('../GetThreadByIdUseCase');
+const DetailReply = require('../../../Domains/replies/entities/DetailReply');
+const ReplyRepository = require('../../../Domains/replies/ReplyRepository');
+const LikeRepository = require('../../../Domains/likes/LikeRepository');
 
-describe("GetThreadByIdUseCase", () => {
-  it("should throw error if get thread by id not contain needed parameter", async () => {
+describe('GetThreadByIdUseCase', () => {
+  it('should throw error if get thread by id not contain needed parameter', async () => {
     /** creating use case instance */
     const getThreadByIdUseCase = new GetThreadByIdUseCase({});
 
     // Action & Assert
     await expect(getThreadByIdUseCase.execute()).rejects.toThrow(
-      "GET_THREAD_BY_ID_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER"
+      'GET_THREAD_BY_ID_USE_CASE.NOT_CONTAIN_NEEDED_PARAMETER',
     );
   });
 
-  it("should throw error if get thread by id parameter not meet data type specification", async () => {
+  it('should throw error if get thread by id parameter not meet data type specification', async () => {
     /** creating use case instance */
     const getThreadByIdUseCase = new GetThreadByIdUseCase({});
 
     // Action & Assert
     await expect(getThreadByIdUseCase.execute(123)).rejects.toThrow(
-      "GET_THREAD_BY_ID_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION"
+      'GET_THREAD_BY_ID_USE_CASE.PARAMETER_NOT_MEET_DATA_TYPE_SPECIFICATION',
     );
   });
 
-  it("should orchestrating the get thread by id action correctly", async () => {
+  it('should orchestrating the get thread by id action correctly', async () => {
     // Arrange
-    const threadId = "thread-123";
+    const threadId = 'thread-123';
 
     const mockDetailThread = {
       id: threadId,
-      title: "title",
-      body: "body",
-      date: "2021-08-08T07:19:09.775Z",
-      username: "dicoding",
+      title: 'title',
+      body: 'body',
+      date: '2021-08-08T07:19:09.775Z',
+      username: 'dicoding',
     };
 
     const comments = [
       {
-        id: "comment-123",
-        username: "johndoe",
-        date: "2021-08-08T07:22:33.555Z",
-        content: "sebuah komentar",
+        id: 'comment-123',
+        username: 'johndoe',
+        date: '2021-08-08T07:22:33.555Z',
+        content: 'sebuah komentar',
         isDelete: false,
       },
       {
-        id: "comment-321",
-        username: "dicoding",
-        date: "2021-08-08T07:26:21.338Z",
-        content: "sebuah komentar",
+        id: 'comment-321',
+        username: 'dicoding',
+        date: '2021-08-08T07:26:21.338Z',
+        content: 'sebuah komentar',
         isDelete: true,
       },
     ];
 
     const replies = [
       {
-        id: "reply-123",
-        username: "johndoe",
-        commentId: "comment-123",
-        date: "2021-08-08T07:22:33.555Z",
-        content: "sebuah balasan",
+        id: 'reply-123',
+        username: 'johndoe',
+        commentId: 'comment-123',
+        date: '2021-08-08T07:22:33.555Z',
+        content: 'sebuah balasan',
         isDelete: false,
       },
       {
-        id: "reply-321",
-        username: "johndoe",
-        commentId: "comment-123",
-        date: "2021-08-08T07:26:21.338Z",
-        content: "sebuah balasan",
+        id: 'reply-321',
+        username: 'johndoe',
+        commentId: 'comment-123',
+        date: '2021-08-08T07:26:21.338Z',
+        content: 'sebuah balasan',
         isDelete: true,
       },
     ];
 
     const likes = [
       {
-        id: "like-123",
-        commentId: "comment-123",
+        id: 'like-123',
+        commentId: 'comment-123',
       },
       {
-        id: "like-321",
-        commentId: "comment-321",
+        id: 'like-321',
+        commentId: 'comment-321',
       },
       {
-        id: "like-456",
-        commentId: "comment-321",
+        id: 'like-456',
+        commentId: 'comment-321',
       },
     ];
 
@@ -112,9 +112,7 @@ describe("GetThreadByIdUseCase", () => {
       .mockImplementation(() => Promise.resolve(replies));
     mockLikeRepository.getLikesByCommentId = jest
       .fn()
-      .mockImplementation((commentId) =>
-        Promise.resolve(likes.filter((like) => like.commentId === commentId))
-      );
+      .mockImplementation((commentId) => Promise.resolve(likes.filter((like) => like.commentId === commentId)));
 
     /** creating use case instance */
     const getThreadUseCase = new GetThreadByIdUseCase({
@@ -130,62 +128,62 @@ describe("GetThreadByIdUseCase", () => {
     // Assert
     expect(detailThread).toStrictEqual(
       new DetailThread({
-        id: "thread-123",
-        title: "title",
-        body: "body",
-        date: "2021-08-08T07:19:09.775Z",
-        username: "dicoding",
+        id: 'thread-123',
+        title: 'title',
+        body: 'body',
+        date: '2021-08-08T07:19:09.775Z',
+        username: 'dicoding',
         comments: [
           new DetailComment({
-            id: "comment-123",
-            username: "johndoe",
-            date: "2021-08-08T07:22:33.555Z",
-            content: "sebuah komentar",
+            id: 'comment-123',
+            username: 'johndoe',
+            date: '2021-08-08T07:22:33.555Z',
+            content: 'sebuah komentar',
             likeCount: 1,
             replies: [
               new DetailReply({
-                id: "reply-123",
-                username: "johndoe",
-                date: "2021-08-08T07:22:33.555Z",
-                content: "sebuah balasan",
+                id: 'reply-123',
+                username: 'johndoe',
+                date: '2021-08-08T07:22:33.555Z',
+                content: 'sebuah balasan',
               }),
               new DetailReply({
-                id: "reply-321",
-                username: "johndoe",
-                date: "2021-08-08T07:26:21.338Z",
-                content: "**balasan telah dihapus**",
+                id: 'reply-321',
+                username: 'johndoe',
+                date: '2021-08-08T07:26:21.338Z',
+                content: '**balasan telah dihapus**',
               }),
             ],
           }),
           new DetailComment({
-            id: "comment-321",
-            username: "dicoding",
-            date: "2021-08-08T07:26:21.338Z",
-            content: "**komentar telah dihapus**",
+            id: 'comment-321',
+            username: 'dicoding',
+            date: '2021-08-08T07:26:21.338Z',
+            content: '**komentar telah dihapus**',
             likeCount: 2,
             replies: [],
           }),
         ],
-      })
+      }),
     );
     expect(mockThreadRepository.verifyThreadAvailability).toBeCalledWith(
-      "thread-123"
+      'thread-123',
     );
-    expect(mockThreadRepository.getThreadById).toBeCalledWith("thread-123");
+    expect(mockThreadRepository.getThreadById).toBeCalledWith('thread-123');
     expect(mockCommentRepository.getCommentsByThreadId).toBeCalledWith(
-      "thread-123"
+      'thread-123',
     );
     expect(mockReplyRepository.getRepliesByCommentId).toBeCalledWith(
-      "comment-123"
+      'comment-123',
     );
     expect(mockReplyRepository.getRepliesByCommentId).toBeCalledWith(
-      "comment-321"
+      'comment-321',
     );
     expect(mockLikeRepository.getLikesByCommentId).toBeCalledWith(
-      "comment-123"
+      'comment-123',
     );
     expect(mockLikeRepository.getLikesByCommentId).toBeCalledWith(
-      "comment-321"
+      'comment-321',
     );
   });
 });

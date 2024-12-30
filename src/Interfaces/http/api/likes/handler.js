@@ -1,4 +1,4 @@
-const LikeUseCase = require("../../../../Applications/use_case/LikeUseCase");
+const LikeUseCase = require('../../../../Applications/use_case/LikeUseCase');
 
 class LikesHandler {
   constructor(container) {
@@ -15,7 +15,7 @@ class LikesHandler {
     await likeUseCase.execute(ownerId, threadId, commentId);
 
     return {
-      status: "success",
+      status: 'success',
     };
   }
 }
